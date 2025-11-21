@@ -16,8 +16,8 @@ pub struct Tetrimino {
 }
 
 impl Config {
-    pub fn get_tetrimino_color(&self, identifier: &str) -> JsValue {
-        JsValue::from_str(self.tetrimino_variants[identifier].color.as_str())
+    pub fn get_tetrimino_color(&self, id: &String) -> JsValue {
+        JsValue::from_str(self.tetrimino_variants[id].color.as_str())
     }
 
     pub fn get_spawn_zone_border_height(&self) -> usize {
@@ -34,6 +34,10 @@ impl Config {
                 })
                 .min()
                 .unwrap()
+    }
+
+    pub fn get_tetrimino_orientations(&self, id: &String) -> &Vec<Vec<(usize, usize)>> {
+        &self.tetrimino_variants[id].orientations
     }
 }
 
@@ -53,10 +57,70 @@ impl Default for Config {
             },
         );
         tetrimino_variants.insert(
+            "J".to_string(),
+            Tetrimino {
+                color: "blue".to_string(),
+                orientations: vec![
+                    vec![(1, 0), (1, 1), (1, 2), (2, 0)],
+                    vec![(0, 1), (1, 1), (2, 1), (2, 2)],
+                    vec![(0, 2), (1, 0), (1, 1), (1, 2)],
+                    vec![(0, 0), (0, 1), (1, 1), (2, 1)],
+                ],
+            },
+        );
+        tetrimino_variants.insert(
+            "L".to_string(),
+            Tetrimino {
+                color: "orange".to_string(),
+                orientations: vec![
+                    vec![(1, 0), (1, 1), (1, 2), (2, 2)],
+                    vec![(0, 1), (0, 2), (1, 1), (2, 1)],
+                    vec![(0, 0), (1, 0), (1, 1), (1, 2)],
+                    vec![(0, 1), (1, 1), (2, 0), (2, 1)],
+                ],
+            },
+        );
+        tetrimino_variants.insert(
             "O".to_string(),
             Tetrimino {
                 color: "yellow".to_string(),
                 orientations: vec![vec![(1, 1), (1, 2), (2, 1), (2, 2)]],
+            },
+        );
+        tetrimino_variants.insert(
+            "S".to_string(),
+            Tetrimino {
+                color: "green".to_string(),
+                orientations: vec![
+                    vec![(1, 0), (1, 1), (2, 1), (2, 2)],
+                    vec![(0, 2), (1, 1), (1, 2), (2, 1)],
+                    vec![(0, 0), (0, 1), (1, 1), (1, 2)],
+                    vec![(0, 1), (1, 0), (1, 1), (2, 0)],
+                ],
+            },
+        );
+        tetrimino_variants.insert(
+            "T".to_string(),
+            Tetrimino {
+                color: "purple".to_string(),
+                orientations: vec![
+                    vec![(1, 0), (1, 1), (1, 2), (2, 1)],
+                    vec![(0, 1), (1, 1), (1, 2), (2, 1)],
+                    vec![(0, 1), (1, 0), (1, 1), (1, 2)],
+                    vec![(0, 1), (1, 0), (1, 1), (2, 1)],
+                ],
+            },
+        );
+        tetrimino_variants.insert(
+            "Z".to_string(),
+            Tetrimino {
+                color: "red".to_string(),
+                orientations: vec![
+                    vec![(1, 1), (1, 2), (2, 0), (2, 1)],
+                    vec![(0, 1), (1, 1), (1, 2), (2, 2)],
+                    vec![(0, 1), (0, 2), (1, 0), (1, 1)],
+                    vec![(0, 0), (1, 0), (1, 1), (2, 1)],
+                ],
             },
         );
 

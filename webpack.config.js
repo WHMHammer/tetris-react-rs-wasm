@@ -6,7 +6,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   devServer: {
-    static: path.resolve(__dirname, "dist"),
+    hot: true,
+    open: true,
   },
   devtool: "inline-source-map",
   entry: path.resolve(__dirname, "tetris-react-ts", "index.tsx"),
@@ -33,7 +34,6 @@ module.exports = {
   output: {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "./",
   },
   plugins: [
     new HtmlWebpackPlugin({

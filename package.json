@@ -43,6 +43,6 @@
     "release": "npm run release:rs && npm run release:react",
     "release:react": "webpack --mode=production",
     "release:rs": "npx --yes wasm-pack build --release",
-    "start": "npm run build:rs && webpack serve --mode=development --open"
+    "start": "npm run build:rs && webpack serve --mode=development"
   }
 }

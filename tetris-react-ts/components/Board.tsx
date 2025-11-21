@@ -23,7 +23,6 @@ export const BoardComponent: FC<BoardProps> = ({
     () => [...Array(displayWidth).keys()],
     [displayWidth],
   );
-  console.log(buffer);
 
   return (
     <div className="board">

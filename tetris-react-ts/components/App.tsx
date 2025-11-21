@@ -1,9 +1,26 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { BoardComponent } from "./Board";
 import { Game } from "../../pkg";
 
 export const App: FC = () => {
-  const [game] = useState(Game.new());
+  const [game, setGame] = useState(Game.new());
+  useEffect(() => {
+    const windowKeydownHandler = (event: KeyboardEvent) => {
+      if (event.key !== "F12") {
+        event.preventDefault();
+      }
+      console.log(event);
+      switch (event.key) {
+        case "w":
+          setGame(game.rotate());
+          return;
+      }
+    };
+    window.addEventListener("keydown", windowKeydownHandler);
+    return () => {
+      window.removeEventListener("keydown", windowKeydownHandler);
+    };
+  }, [game]);
 
   return (
     <>
@@ -14,6 +31,7 @@ export const App: FC = () => {
         spawnZoneBorderColor={game.get_spawn_zone_border_color()}
         buffer={game.get_display_buffer()}
       />
+      <button onClick={() => setGame(Game.new())}>New Game</button>
     </>
   );
 };
