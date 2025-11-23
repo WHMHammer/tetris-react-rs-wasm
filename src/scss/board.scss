@@ -1,0 +1,48 @@
+@use "sass:map";
+
+@use "variables";
+
+.board {
+  display: flex;
+  flex-direction: column;
+
+  &__row {
+    display: flex;
+
+    &--danger-zone-bottom {
+      .board__cell {
+        border-bottom-color: map.get(
+          variables.$colors,
+          "board-danger-zone-border"
+        );
+      }
+    }
+
+    &--safe-zone-top {
+      .board__cell {
+        border-top-color: map.get(
+          variables.$colors,
+          "board-danger-zone-border"
+        );
+      }
+    }
+  }
+
+  &__cell {
+    border: 1px solid map.get(variables.$colors, "cell-border");
+    width: 24px;
+    height: 24px;
+    background-color: map.get(variables.$colors, "cell");
+
+    &--danger {
+      border: 1px solid map.get(variables.$colors, "cell");
+      background-color: map.get(variables.$colors, "cell-border");
+    }
+
+    @each $tetrimino-id in [I J L O S T Z] {
+      &--#{$tetrimino-id} {
+        background-color: map.get(variables.$colors, "#{$tetrimino-id}");
+      }
+    }
+  }
+}

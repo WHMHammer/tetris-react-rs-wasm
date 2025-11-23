@@ -120,13 +120,21 @@ checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
 
 [[package]]
 name = "syn"
-version = "2.0.110"
+version = "2.0.111"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a99801b5bd34ede4cf3fc688c5919368fea4e4814a4664359503e6015b280aea"
+checksum = "390cc9a294ab71bdb1aa2e99d13be9c753cd2d7bd6560c77118597410c4d2e87"
 dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
+]
+
+[[package]]
+name = "tetris-rs"
+version = "0.1.0"
+source = "git+https://github.com/WHMHammer/tetris-rs.git#6844b41d1de6847e840e86b19036b7f9f9442ba5"
+dependencies = [
+ "rand",
 ]
 
 [[package]]
@@ -135,6 +143,7 @@ version = "0.1.0"
 dependencies = [
  "getrandom",
  "rand",
+ "tetris-rs",
  "wasm-bindgen",
 ]
 

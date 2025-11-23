@@ -1,16 +1,18 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable no-undef */
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import path from "path";
+import { fileURLToPath } from "url";
+import { Configuration } from "webpack";
+import { Configuration as DevServerConfiguration } from "webpack-dev-server";
 
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-module.exports = {
+const config: Configuration & DevServerConfiguration = {
   devServer: {
     hot: true,
     open: true,
   },
   devtool: "inline-source-map",
-  entry: path.resolve(__dirname, "tetris-react-ts", "index.tsx"),
+  entry: path.resolve(__dirname, "src", "index.tsx"),
   experiments: {
     asyncWebAssembly: true,
   },
@@ -39,7 +41,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       hash: true,
       scriptLoading: "module",
-      template: path.resolve(__dirname, "tetris-react-ts", "index.html"),
+      template: path.resolve(__dirname, "src", "index.html"),
       title: "Tetris",
     }),
   ],
@@ -47,3 +49,5 @@ module.exports = {
     extensions: [".js", ".mjs", ".cjs", ".ts", ".jsx", ".tsx"],
   },
 };
+
+export default config;
