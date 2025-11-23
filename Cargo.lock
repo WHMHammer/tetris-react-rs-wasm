@@ -132,7 +132,6 @@ dependencies = [
 [[package]]
 name = "tetris-rs"
 version = "0.1.0"
-source = "git+https://github.com/WHMHammer/tetris-rs.git#6844b41d1de6847e840e86b19036b7f9f9442ba5"
 dependencies = [
  "rand",
 ]

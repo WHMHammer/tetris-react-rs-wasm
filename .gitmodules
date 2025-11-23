@@ -1,0 +1,3 @@
+[submodule "submodules/tetris-rs"]
+	path = submodules/tetris-rs
+	url = git@github.com:WHMHammer/tetris-rs.git
