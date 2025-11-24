@@ -5,39 +5,43 @@
 .board {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid map.get(variables.$colors, "cell");
+  border-bottom: 1px solid map.get(variables.$colors, "cell-border");
+  width: fit-content;
 
   &__row {
     display: flex;
-
-    &--danger-zone-bottom {
-      .board__cell {
-        border-bottom-color: map.get(
-          variables.$colors,
-          "board-danger-zone-border"
-        );
-      }
-    }
-
-    &--safe-zone-top {
-      .board__cell {
-        border-top-color: map.get(
-          variables.$colors,
-          "board-danger-zone-border"
-        );
-      }
-    }
-  }
-
-  &__cell {
     border: 1px solid map.get(variables.$colors, "cell-border");
-    width: 24px;
-    height: 24px;
+    width: fit-content;
     background-color: map.get(variables.$colors, "cell");
 
     &--danger {
       border: 1px solid map.get(variables.$colors, "cell");
       background-color: map.get(variables.$colors, "cell-border");
+
+      .board__cell {
+        border-left: 1px solid map.get(variables.$colors, "cell");
+        border-right: 1px solid map.get(variables.$colors, "cell");
+      }
     }
+
+    &:nth-last-child(1 of &--danger) {
+      border-bottom-color: map.get(
+        variables.$colors,
+        "board-danger-zone-border"
+      );
+    }
+
+    &:nth-child(1 of :not(&--danger)) {
+      border-top-color: map.get(variables.$colors, "board-danger-zone-border");
+    }
+  }
+
+  &__cell {
+    border-left: 1px solid map.get(variables.$colors, "cell-border");
+    border-right: 1px solid map.get(variables.$colors, "cell-border");
+    width: 24px;
+    height: 24px;
 
     @each $tetrimino-id in [I J L O S T Z] {
       &--#{$tetrimino-id} {

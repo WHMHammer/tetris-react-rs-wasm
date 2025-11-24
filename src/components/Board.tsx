@@ -4,7 +4,7 @@ interface BoardProps {
   width: number;
   height: number;
   buffer: (string | null)[];
-  dangerZoneXLow: number;
+  dangerZoneBorder: number;
   currentTetriminoId: string;
   currentTetriminoCellsBoardBufferIndices: Uint32Array;
 }
@@ -13,7 +13,7 @@ export const BoardComponent: FC<BoardProps> = ({
   width,
   height,
   buffer,
-  dangerZoneXLow,
+  dangerZoneBorder,
   currentTetriminoId,
   currentTetriminoCellsBoardBufferIndices,
 }) => {
@@ -30,19 +30,13 @@ export const BoardComponent: FC<BoardProps> = ({
     <div className="board">
       {boardReverseXIndices.map((x) => {
         const classNames = ["board__row"];
-        if (x === dangerZoneXLow) {
-          classNames.push("board__row--danger-zone-bottom");
-        } else if (x + 1 === dangerZoneXLow) {
-          classNames.push("board__row--safe-zone-top");
+        if (x >= dangerZoneBorder) {
+          classNames.push("board__row--danger");
         }
-        const isInDangerZone = x >= dangerZoneXLow;
         return (
           <div key={x} className={classNames.join(" ")}>
             {boardYIndices.map((y) => {
               const classNames = ["board__cell"];
-              if (isInDangerZone) {
-                classNames.push("board__cell--danger");
-              }
               const id = buffer[x * width + y];
               if (id) {
                 classNames.push("board__cell--" + id);

@@ -42,6 +42,7 @@
     "build": "npm run build:rs && npm run build:react",
     "build:react": "webpack --mode=development",
     "build:rs": "npx --yes wasm-pack build --dev",
+    "prepare": "husky",
     "release": "npm run release:rs && npm run release:react",
     "release:react": "webpack --mode=production",
     "release:rs": "npx --yes wasm-pack build --release",

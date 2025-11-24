@@ -1,9 +1,10 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import pluginTs from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 
-export default [
+export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
     languageOptions: { globals: globals.browser },
@@ -18,4 +19,4 @@ export default [
   pluginJs.configs.recommended,
   ...pluginTs.configs.recommended,
   pluginReact.configs.flat["jsx-runtime"],
-];
+]);

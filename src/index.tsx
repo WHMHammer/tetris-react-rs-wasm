@@ -9,8 +9,8 @@ createRoot(document.getElementById("app")!).render(
   <StrictMode>
     <HashRouter>
       <Routes>
-        <Route index element={<Navigate to="/index" />} />
-        <Route path="/index" element={<App />} />
+        <Route index element={<Navigate to="/standard" />} />
+        <Route path="/standard" element={<App />} />
       </Routes>
     </HashRouter>
   </StrictMode>,
