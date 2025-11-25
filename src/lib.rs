@@ -80,6 +80,31 @@ impl GameWrapper {
         }
     }
 
+    pub fn next_tetrimino_ids(&self) -> Vec<String> {
+        match self.game.read() {
+            Ok(game) => {
+                let mut n = Vec::with_capacity(game.preview_next_count());
+                n.extend(game.next_tetrimino_ids_iter().cloned());
+                n
+            }
+            Err(err) => panic!("{}", err),
+        }
+    }
+
+    pub fn held(&self) -> Option<String> {
+        match self.game.read() {
+            Ok(game) => game.held().clone(),
+            Err(err) => panic!("{}", err),
+        }
+    }
+
+    pub fn score(&self) -> usize {
+        match self.game.read() {
+            Ok(game) => game.score(),
+            Err(err) => panic!("{}", err),
+        }
+    }
+
     pub fn is_over(&self) -> bool {
         match self.game.read() {
             Ok(game) => game.is_over(),
@@ -128,5 +153,9 @@ impl GameWrapper {
 
     pub fn get_move_right_closure(&self) -> JsValue {
         self.get_closure(|game| game.move_right())
+    }
+
+    pub fn get_hold_closure(&mut self) -> JsValue {
+        self.get_closure(|game| game.hold())
     }
 }

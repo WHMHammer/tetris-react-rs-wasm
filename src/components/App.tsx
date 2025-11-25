@@ -15,6 +15,7 @@ export const App: FC = () => {
     const drop: () => GameWrapper = game.get_drop_closure();
     const moveLeft: () => GameWrapper = game.get_move_left_closure();
     const moveRight: () => GameWrapper = game.get_move_right_closure();
+    const hold: () => GameWrapper = game.get_hold_closure();
 
     const windowKeydownHandler = (event: KeyboardEvent) => {
       if (event.key !== "F12") {
@@ -45,6 +46,10 @@ export const App: FC = () => {
         case "d":
           setGame(moveRight());
           return;
+
+        case "h":
+          setGame(hold());
+          return;
       }
     };
     window.addEventListener("keydown", windowKeydownHandler);
@@ -62,9 +67,12 @@ export const App: FC = () => {
         currentTetriminoCellsBoardBufferIndices={game.current_tetrimino_cells_board_buffer_indices()}
       />
       <div>
+        Score: {game.score()}
         <button onClick={() => setGame(GameWrapper.default())}>New Game</button>
         {game.is_over() && "Game Over!"}
       </div>
+      <div>Held: {game.held()}</div>
+      <div>Next: {game.next_tetrimino_ids().join(" ")}</div>
     </>
   );
 };
