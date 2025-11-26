@@ -43,7 +43,7 @@
     width: 24px;
     height: 24px;
 
-    @each $tetrimino-id in [I J L O S T Z] {
+    @each $tetrimino-id in [ghost I J L O S T Z] {
       &--#{$tetrimino-id} {
         background-color: map.get(variables.$colors, "#{$tetrimino-id}");
       }

@@ -65,6 +65,7 @@ export const App: FC = () => {
         dangerZoneBorder={game.danger_zone_border()}
         currentTetriminoId={game.current_tetrimino_id()}
         currentTetriminoCellsBoardBufferIndices={game.current_tetrimino_cells_board_buffer_indices()}
+        ghostTetriminoCellsBoardBufferIndices={game.ghost_tetrimino_cells_board_buffer_indices()}
       />
       <div>
         Score: {game.score()}

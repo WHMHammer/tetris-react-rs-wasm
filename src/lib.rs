@@ -80,6 +80,17 @@ impl GameWrapper {
         }
     }
 
+    // TODO: reuse the logics of `current_tetrimino_cells_board_buffer_indices`
+    pub fn ghost_tetrimino_cells_board_buffer_indices(&self) -> Vec<usize> {
+        match self.game.read() {
+            Ok(game) => game
+                .ghost_tetrimino_cells_iter()
+                .map(|Position { x, y }| x * game.board()[0].len() + y)
+                .collect(),
+            Err(err) => panic!("{}", err),
+        }
+    }
+
     pub fn next_tetrimino_ids(&self) -> Vec<String> {
         match self.game.read() {
             Ok(game) => {

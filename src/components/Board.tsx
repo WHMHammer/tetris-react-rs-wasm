@@ -7,6 +7,7 @@ interface BoardProps {
   dangerZoneBorder: number;
   currentTetriminoId: string;
   currentTetriminoCellsBoardBufferIndices: Uint32Array;
+  ghostTetriminoCellsBoardBufferIndices: Uint32Array;
 }
 
 export const BoardComponent: FC<BoardProps> = ({
@@ -16,12 +17,16 @@ export const BoardComponent: FC<BoardProps> = ({
   dangerZoneBorder,
   currentTetriminoId,
   currentTetriminoCellsBoardBufferIndices,
+  ghostTetriminoCellsBoardBufferIndices,
 }) => {
   const boardReverseXIndices = useMemo(
     () => [...Array(height).keys()].reverse(),
     [height],
   );
   const boardYIndices = useMemo(() => [...Array(width).keys()], [width]);
+  ghostTetriminoCellsBoardBufferIndices.forEach((i) => {
+    buffer[i] = "ghost";
+  });
   currentTetriminoCellsBoardBufferIndices.forEach((i) => {
     buffer[i] = currentTetriminoId;
   });
