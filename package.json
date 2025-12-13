@@ -39,13 +39,13 @@
   "name": "tetris-react-rs-wasm",
   "private": true,
   "scripts": {
-    "build": "npm run build:rs && npm run build:react",
     "build:react": "webpack --mode=development",
     "build:rs": "npx --yes wasm-pack build --dev",
+    "build": "npm run build:rs && npm run build:react",
     "prepare": "husky",
-    "release": "npm run release:rs && npm run release:react",
     "release:react": "webpack --mode=production",
     "release:rs": "npx --yes wasm-pack build --release",
+    "release": "npm run release:rs && npm run release:react",
     "start": "npm run build:rs && webpack serve --mode=development"
   }
 }

@@ -1,10 +1,15 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { BoardComponent } from "./Board";
 import { GameWrapper } from "../../pkg";
 
 export const App: FC = () => {
   const [game, setGame] = useState(GameWrapper.default());
   const gameId = game.id();
+  const tetriminoVariantsNames = useMemo(
+    () => game.tetrimino_variants_names(),
+    [gameId],
+  );
+  const held = game.held();
 
   useEffect(() => {
     const rotateForwards: () => GameWrapper =
@@ -58,22 +63,19 @@ export const App: FC = () => {
 
   return (
     <>
-      <BoardComponent
-        width={game.board_width()}
-        height={game.board_height()}
-        buffer={game.board_buffer()}
-        dangerZoneBorder={game.danger_zone_border()}
-        currentTetriminoId={game.current_tetrimino_id()}
-        currentTetriminoCellsBoardBufferIndices={game.current_tetrimino_cells_board_buffer_indices()}
-        ghostTetriminoCellsBoardBufferIndices={game.ghost_tetrimino_cells_board_buffer_indices()}
-      />
+      <BoardComponent game={game} />
+      <button onClick={() => setGame(GameWrapper.default())}>New Game</button>
       <div>
         Score: {game.score()}
-        <button onClick={() => setGame(GameWrapper.default())}>New Game</button>
-        {game.is_over() && "Game Over!"}
+        {game.is_over() && " Game Over!"}
       </div>
-      <div>Held: {game.held()}</div>
-      <div>Next: {game.next_tetrimino_ids().join(" ")}</div>
+      <div>Held: {held !== undefined && tetriminoVariantsNames[held]}</div>
+      <div>
+        Next:{" "}
+        {Array.from(game.next_tetrimino_ids())
+          .map((tetrimino_id) => tetriminoVariantsNames[tetrimino_id])
+          .join(" ")}
+      </div>
     </>
   );
 };
